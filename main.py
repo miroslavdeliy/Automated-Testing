@@ -15,3 +15,5 @@ user_name = driver.find_element(By.XPATH, "//*[@id='user-name']") #Создан�
 user_name.send_keys("standard_user") #Ввести данные в поле логина
 password = driver.find_element(By.XPATH, "//*[@id='password']") #Создание объекта поля ввода пароля
 password.send_keys("secret_sauce") #ввести данные в поле пароля
+button_login = driver.find_element(By.XPATH, "//*[@id='login-button']") #Создание объекта кнопки входа
+button_login.click() #Нажать на кнопку
