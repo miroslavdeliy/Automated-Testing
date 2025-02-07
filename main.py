@@ -1,6 +1,7 @@
 #Импортирование вебдрайвера
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
 
@@ -10,3 +11,7 @@ driver = webdriver.Chrome(options=options, service=ChromeService(ChromeDriverMan
 base_url = 'https://www.saucedemo.com/' #Базовый URL
 driver.get(base_url) #Открыть ссылку
 driver.set_window_size(1920, 1080) #Установить разрешение окна
+user_name = driver.find_element(By.ID, "user-name") #Создание объекта поля ввода логина
+user_name.send_keys("standard_user") #Ввести данные в поле логина
+password = driver.find_element(By.ID, "password") #Создание объекта поля ввода пароля
+password.send_keys("secret_sauce") #ввести данные в поле пароля
