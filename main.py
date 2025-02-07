@@ -11,7 +11,7 @@ driver = webdriver.Chrome(options=options, service=ChromeService(ChromeDriverMan
 base_url = 'https://www.saucedemo.com/' #Базовый URL
 driver.get(base_url) #Открыть ссылку
 driver.set_window_size(1920, 1080) #Установить разрешение окна
-user_name = driver.find_element(By.ID, "user-name") #Создание объекта поля ввода логина
+user_name = driver.find_element(By.XPATH, "//*[@id='user-name']") #Создание объекта поля ввода логина
 user_name.send_keys("standard_user") #Ввести данные в поле логина
-password = driver.find_element(By.ID, "password") #Создание объекта поля ввода пароля
+password = driver.find_element(By.XPATH, "//*[@id='password']") #Создание объекта поля ввода пароля
 password.send_keys("secret_sauce") #ввести данные в поле пароля
