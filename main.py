@@ -7,6 +7,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
+options.add_argument("--headless") #Headless режим
 base_url = 'https://www.saucedemo.com/' #Базовый URL
 driver = webdriver.Chrome(options=options, service=ChromeService(ChromeDriverManager().install()))
 
