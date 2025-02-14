@@ -18,22 +18,21 @@ driver.set_window_size(1920, 1080)
 #Авторизация на сайте
 user_name = driver.find_element(By.XPATH, "//*[@id='user-name']")
 user_name.send_keys("standard_user")
-print('Input Login')
+print('Введен логин')
 password = driver.find_element(By.XPATH, "//*[@id='password']")
-password.send_keys("secret_sauce")
-print('Input Password')
+password.send_keys("secret_sauc")
+print('Введен пароль')
 button_login = driver.find_element(By.XPATH, "//*[@id='login-button']")
 button_login.click()
-print('Click Login Button')
+print('Нажата кнопка входа')
 
-#Проверка, что после авторизации находимся на целевом url
-get_url = driver.current_url
-url = 'https://www.saucedemo.com/inventory.html'
-assert url == get_url
-print('URL корректен')
+#Проверка корректности сообщения о неправильных входных данных
+warning_text = driver.find_element(By.XPATH, "//h3[@data-test='error']")
+value_warning_text = warning_text.text
+assert value_warning_text == 'Epic sadface: Username and password do not match any user in this service', print('Сообщение некорректно!')
+print('Сообщение корректно')
 
-#Проверка, что находимся на странице каталога
-text_products = driver.find_element(By.XPATH, "//span[@class='title']")
-value_text_products = text_products.text
-assert value_text_products == 'Products'
-print('Заголовок корректен')
+#Закрытие окна сообщения об ошибке
+error_button = driver.find_element(By.XPATH, "//button[@class='error-button']")
+error_button.click()
+print('Закрыто сообщение об ошибке!')
