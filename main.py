@@ -1,5 +1,6 @@
 #Импортирование библиотек
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
@@ -17,7 +18,7 @@ driver.set_window_size(1920, 1080)
 
 #Ввести неверный логин
 user_name = driver.find_element(By.XPATH, "//input[@id = 'user-name']")
-user_name.send_keys('standart')
+user_name.send_keys('standard_user')
 print('Введен логин')
 
 #Ввести пароль
@@ -25,13 +26,16 @@ password = driver.find_element(By.XPATH, "//input[@id = 'password']")
 password.send_keys('secret_sauce')
 print('Введен пароль')
 
-#Нажать на кнопку входа
-button_login = driver.find_element(By.XPATH, "//input[@id = 'login-button']")
-button_login.click()
-print('Нажата кнопка входа')
+#Выделение полей логина и пароля и удаление их
+user_name.send_keys(Keys.CONTROL + 'a')
+time.sleep(2)
+user_name.send_keys(Keys.BACKSPACE)
+password.send_keys(Keys.CONTROL + 'a')
+time.sleep(2)
+password.send_keys(Keys.BACKSPACE)
 
-#Ждем 5 секунд
-time.sleep(5)
+#Нажатие на кнопку авторизации
+button_click = driver.find_element(By.XPATH, "//input[@id = 'login-button']")
+button_click.click()
 
-#Обновить страницу
-driver.refresh()
+
