@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-import datetime
+from selenium.webdriver.common.action_chains import ActionChains
 
 options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
@@ -31,8 +31,19 @@ button_click = driver.find_element(By.XPATH, "//input[@id = 'login-button']")
 button_click.click()
 print('Нажата кнопка авторизации')
 
-#Создание скриншота
-now_date = datetime.datetime.now().strftime("%Y.%m.%d-%H.%M.%S")
-name_screnshot = 'screenshot' + now_date + '.png'
-driver.save_screenshot('C:\\Users\\miros\\PycharmProjects\\Send_key\\screen\\' + name_screnshot)
-print('Скриншот сохранен')
+#Добавить все товары в корзину и перейти в нее
+add_backcap_button = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-backpack"]').click()
+add_bike_light_button = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-bike-light"]').click()
+add_t_short_button = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-bolt-t-shirt"]').click()
+add_jacket_button = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-fleece-jacket"]').click()
+add_onesie_button = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-onesie"]').click()
+add_T_short_red_button = driver.find_element(By.XPATH, '//*[@id="add-to-cart-test.allthethings()-t-shirt-(red)"]').click()
+shopping_cart_link = driver.find_element(By.XPATH, '//*[@id="shopping_cart_container"]/a').click()
+print('Добавили все товары в корзину')
+
+#Наведение на последний элемент в корзине
+actions = ActionChains(driver)
+element = driver.find_element(By.ID, 'item_3_title_link')
+actions.move_to_element(element).perform()
+print('Навелись на последний элемент')
+
