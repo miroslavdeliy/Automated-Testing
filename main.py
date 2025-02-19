@@ -1,5 +1,6 @@
 #Импортирование библиотек
 from selenium import webdriver
+from selenium.webdriver import Keys
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
@@ -16,34 +17,32 @@ driver.get(base_url)
 driver.set_window_size(1920, 1080)
 print('Открыто окно браузера')
 
-#Ввести логин
+#Ввести неправильный логин
 user_name = driver.find_element(By.XPATH, "//input[@id = 'user-name']")
-user_name.send_keys('standard_user')
-print('Введен логин')
+user_name.send_keys('standard_us')
+print('Введен неправильный логин')
 
-#Ввести пароль
+#Ввести неправильный пароль
 password = driver.find_element(By.XPATH, "//input[@id = 'password']")
+password.send_keys('secret_s')
+print('Введен неправильный пароль')
+
+#Выделение полей и удаление
+user_name.send_keys(Keys.CONTROL + 'a')
+user_name.send_keys(Keys.DELETE)
+password.send_keys(Keys.CONTROL + 'a')
+password.send_keys(Keys.DELETE)
+print('Поля очищены')
+
+#Ввод правильных данных
+user_name.send_keys('standard_user')
 password.send_keys('secret_sauce')
-print('Введен пароль')
+print('Введены правильные данные')
 
 #Нажатие на кнопку авторизации
 button_click = driver.find_element(By.XPATH, "//input[@id = 'login-button']")
 button_click.click()
 print('Нажата кнопка авторизации')
 
-#Добавить все товары в корзину и перейти в нее
-add_backcap_button = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-backpack"]').click()
-add_bike_light_button = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-bike-light"]').click()
-add_t_short_button = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-bolt-t-shirt"]').click()
-add_jacket_button = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-fleece-jacket"]').click()
-add_onesie_button = driver.find_element(By.XPATH, '//*[@id="add-to-cart-sauce-labs-onesie"]').click()
-add_T_short_red_button = driver.find_element(By.XPATH, '//*[@id="add-to-cart-test.allthethings()-t-shirt-(red)"]').click()
-shopping_cart_link = driver.find_element(By.XPATH, '//*[@id="shopping_cart_container"]/a').click()
-print('Добавили все товары в корзину')
 
-#Наведение на последний элемент в корзине
-actions = ActionChains(driver)
-element = driver.find_element(By.ID, 'item_3_title_link')
-actions.move_to_element(element).perform()
-print('Навелись на последний элемент')
 
