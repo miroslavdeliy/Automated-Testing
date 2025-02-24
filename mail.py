@@ -18,5 +18,5 @@ check_box = driver.find_element(By.XPATH, "//span[@class='rct-checkbox']")
 check_box.click()
 
 #Проверка, что выбран
-check_box.is_selected()
+assert not check_box.is_selected(), 'Ошибка! Чек-бокс не выбран!'
 print('Чек-бокс выбран')
