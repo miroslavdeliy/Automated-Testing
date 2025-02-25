@@ -14,9 +14,10 @@ driver.get(base_url)
 driver.set_window_size(1920,1080)
 
 #Выбрать чек бокс
-check_box = driver.find_element(By.XPATH, "//span[@class='rct-checkbox']")
+check_box = driver.find_element(By.XPATH, '//span[@class="rct-checkbox"]')
 check_box.click()
 
 #Проверка, что выбран
-assert not check_box.is_selected(), 'Ошибка! Чек-бокс не выбран!'
+check_box_input = driver.find_element(By.XPATH, '//input[@type="checkbox"]')
+assert check_box_input.is_selected(), 'Ошибка! Чек-бокс не выбран!'
 print('Чек-бокс выбран')
