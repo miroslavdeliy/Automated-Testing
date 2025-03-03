@@ -1,4 +1,3 @@
-import glob
 import os
 import time
 
@@ -22,26 +21,18 @@ driver.set_window_size(1920,1080)
 #Клик по кнопке Download File
 click_button = driver.find_element(By.XPATH, "//button[contains(text(), 'Download File')]")
 click_button.click()
-time.sleep(15)
+time.sleep(5)
 
 #Проверка, что файл в директории
 file_name = "LambdaTest.pdf"
 file_path = path_download + file_name
-assert os.access(file_path, os.F_OK) == True, 'Ошибка! Файл не в директории!'
+assert os.access(file_path, os.F_OK) is True, 'Ошибка! Файл не в директории!'
 print("Файл в директории")
 
 #Проверка, что файл не пустой
-files = glob.glob(os.path.join(path_download, "*.*"))
-for file in files:
-    a = os.path.getsize(file)
-    if a > 10:
-        print("Файл не пустой")
-    else:
-        print("Файл пустой")
-
-#Удаляет файл
-files = glob.glob(os.path.join(path_download, "*.*"))
-for file in files:
-    os.remove(file)
-print('Файл удален')
-
+file_size = os.path.getsize(file_path)
+if file_size > 10:
+    print('Файл не пустой')
+else:
+    print('Ошибка! Файл пустой!')
+    os.remove(file_path)
