@@ -7,7 +7,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as EC
 
 # Создание класса для тестирования
-class Test():
+class Test:
     # Конструктор класса
     def __init__(self):
         options = webdriver.ChromeOptions()
@@ -40,8 +40,8 @@ class Test():
         print('Нажата кнопка авторизации')
 
     # Выбираем продукт из каталога
-    def select_product(self):
-        add_to_cart_button = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="add-to-cart-sauce-labs-backpack"]')))
+    def select_product(self, name_product):
+        add_to_cart_button = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, f'//*[@id="add-to-cart-{name_product}"]')))
         add_to_cart_button.click()
         print('Выбран продукт')
 
@@ -64,6 +64,7 @@ start_test.open_browser()
 start_test.enter_login('standard_user')
 start_test.enter_password('secret_sauce')
 start_test.click_login_button()
-start_test.select_product()
+start_test.select_product('sauce-labs-backpack')
 start_test.go_to_cart()
 start_test.checking_in_cart()
+
