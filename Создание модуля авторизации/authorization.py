@@ -2,10 +2,13 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from open_chrome import OpenChrome
+
 
 # Создание класса авторизации с наследованием
-class Authorization(OpenChrome):
+class LoginPage:
+    def __init__(self, driver):
+        self.driver = driver
+
     # Метод ввода логина
     def enter_login(self, login):
         username_input = WebDriverWait(self.driver, 30).until(

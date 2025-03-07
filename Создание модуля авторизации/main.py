@@ -2,11 +2,21 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from authorization import Authorization
+from authorization import LoginPage
+from open_chrome import OpenChrome
 
 
 # Создание класса для тестирования с наследованием
-class Test(Authorization):
+class Test(OpenChrome):
+
+    #Метод авторизации
+    def authorization(self, login_name, password_name):
+        login = LoginPage(self.driver)
+        login.enter_login(login_name)
+        login.enter_password(password_name)
+        login.click_login_button()
+        print('Вы авторизовались')
+
     # Выбираем продукт из каталога
     def select_product(self, name_product):
         add_to_cart_button = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, f'//*[@id="add-to-cart-{name_product}"]')))
@@ -30,9 +40,7 @@ class Test(Authorization):
 start_test = Test()
 print('Тест стартовал')
 start_test.open_browser()
-start_test.enter_login('standard_user')
-start_test.enter_password('secret_sauce')
-start_test.click_login_button()
+start_test.authorization('standard_user', 'secret_sauce')
 start_test.select_product('sauce-labs-backpack')
 start_test.go_to_cart()
 start_test.checking_in_cart()
